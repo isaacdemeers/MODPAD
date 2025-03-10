@@ -11,7 +11,7 @@ const config = {
     launcher: {
         title: 'ModPad Launcher',
         icon: 'SealCircle', // Icon filename without extension
-        gameDirectory: '.helioslauncher', // Default game directory name in user's app data
+        gameDirectory: '.Modpad', // Default game directory name in user's app data
         discordRPC: {
             clientId: '1ce6e35a-126f-48fd-97fb-54d143ac6d45', // Discord application ID
             enabled: true
@@ -30,7 +30,7 @@ const config = {
         frame: true,
         backgroundColor: '#171614',
         title: 'ModPad Launcher', // Window title
-        resizable: true,
+        resizable: false,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
