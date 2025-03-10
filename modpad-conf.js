@@ -25,8 +25,8 @@ const config = {
 
     // Main Window Configuration
     mainWindow: {
-        width: 1980,
-        height: 552,
+        width: 1080,
+        height: 600,
         frame: true,
         backgroundColor: '#171614',
         title: 'ModPad Launcher', // Window title
