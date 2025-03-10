@@ -1,5 +1,6 @@
 // Work in progress
 const { LoggerUtil } = require('helios-core')
+const ModPadConfig = require('../../../modpad-conf')
 
 const logger = LoggerUtil.getLogger('DiscordWrapper')
 
@@ -10,12 +11,16 @@ const Lang = require('./langloader')
 let client
 let activity
 
-exports.initRPC = function(genSettings, servSettings, initialDetails = Lang.queryJS('discord.waiting')){
+exports.initRPC = function (genSettings, servSettings, initialDetails = Lang.queryJS('discord.waiting')) {
+    if (!ModPadConfig.launcher.discordRPC.enabled) {
+        return
+    }
+
     client = new Client({ transport: 'ipc' })
 
     activity = {
         details: initialDetails,
-        state: Lang.queryJS('discord.state', {shortId: servSettings.shortId}),
+        state: Lang.queryJS('discord.state', { shortId: servSettings.shortId }),
         largeImageKey: servSettings.largeImageKey,
         largeImageText: servSettings.largeImageText,
         smallImageKey: genSettings.smallImageKey,
@@ -28,9 +33,9 @@ exports.initRPC = function(genSettings, servSettings, initialDetails = Lang.quer
         logger.info('Discord RPC Connected')
         client.setActivity(activity)
     })
-    
-    client.login({clientId: genSettings.clientId}).catch(error => {
-        if(error.message.includes('ENOENT')) {
+
+    client.login({ clientId: ModPadConfig.launcher.discordRPC.clientId }).catch(error => {
+        if (error.message.includes('ENOENT')) {
             logger.info('Unable to initialize Discord Rich Presence, no client detected.')
         } else {
             logger.info('Unable to initialize Discord Rich Presence: ' + error.message, error)
@@ -38,13 +43,14 @@ exports.initRPC = function(genSettings, servSettings, initialDetails = Lang.quer
     })
 }
 
-exports.updateDetails = function(details){
+exports.updateDetails = function (details) {
+    if (!client) return
     activity.details = details
     client.setActivity(activity)
 }
 
-exports.shutdownRPC = function(){
-    if(!client) return
+exports.shutdownRPC = function () {
+    if (!client) return
     client.clearActivity()
     client.destroy()
     client = null

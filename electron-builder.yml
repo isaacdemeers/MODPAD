@@ -1,8 +1,8 @@
-appId: 'helioslauncher'
-productName: 'Helios Launcher'
-artifactName: '${productName}-setup-${version}.${ext}'
+appId: ${ModPadConfig.build.appId}
+productName: ${ModPadConfig.build.productName}
+artifactName: ${ModPadConfig.build.artifactName}
 
-copyright: 'Copyright © 2018-2024 Daniel Scalzi'
+copyright: ${ModPadConfig.build.copyright}
 
 asar: true
 compression: 'maximum'
@@ -15,9 +15,7 @@ extraResources:
 
 # Windows Configuration
 win: 
-  target: 
-    - target: 'nsis'
-      arch: 'x64'
+  target: ${ModPadConfig.build.win.target}
 
 # Windows Installer Configuration
 nsis:
@@ -28,24 +26,20 @@ nsis:
 
 # macOS Configuration
 mac:
-  target:
-    - target: 'dmg'
-      arch:
-        - 'x64'
-        - 'arm64'
+  target: ${ModPadConfig.build.mac.target}
   artifactName: '${productName}-setup-${version}-${arch}.${ext}'
-  category: 'public.app-category.games'
+  category: ${ModPadConfig.build.mac.category}
 
 # Linux Configuration
 linux: 
-  target: 'AppImage'
-  maintainer: 'Daniel Scalzi'
-  vendor: 'Daniel Scalzi'
-  synopsis: 'Modded Minecraft Launcher'
-  description: 'Custom launcher which allows users to join modded servers. All mods, configurations, and updates are handled automatically.'
-  category: 'Game'
+  target: ${ModPadConfig.build.linux.target}
+  maintainer: ${ModPadConfig.build.linux.maintainer}
+  vendor: ${ModPadConfig.build.linux.vendor}
+  synopsis: ${ModPadConfig.build.linux.synopsis}
+  description: ${ModPadConfig.build.linux.description}
+  category: ${ModPadConfig.build.linux.category}
 
 
 directories:
-  buildResources: 'build'
-  output: 'dist'
+  buildResources: ${ModPadConfig.build.directories.buildResources}
+  output: ${ModPadConfig.build.directories.output}
