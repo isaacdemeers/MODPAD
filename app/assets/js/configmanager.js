@@ -8,7 +8,7 @@ const logger = LoggerUtil.getLogger('ConfigManager')
 
 const sysRoot = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Application Support' : process.env.HOME)
 
-const dataPath = path.join(sysRoot, '.helioslauncher')
+const dataPath = path.join(sysRoot, ModPadConfig.launcher.gameDirectory)
 
 const launcherDir = require('@electron/remote').app.getPath('userData')
 
@@ -203,7 +203,7 @@ exports.isFirstLaunch = function () {
  * @returns {string} The name of the folder.
  */
 exports.getTempNativeFolder = function () {
-    return 'WCNatives'
+    return ModPadConfig.settings.launcher.tempNativeFolder
 }
 
 // System Settings (Unconfigurable on UI)
@@ -243,7 +243,7 @@ exports.setNewsCacheDismissed = function (dismissed) {
  * @returns {string} The launcher's common directory.
  */
 exports.getCommonDirectory = function () {
-    return path.join(exports.getDataDirectory(), 'common')
+    return path.join(exports.getDataDirectory(), ModPadConfig.settings.launcher.commonDirectory)
 }
 
 /**
@@ -253,7 +253,7 @@ exports.getCommonDirectory = function () {
  * @returns {string} The launcher's instance directory.
  */
 exports.getInstanceDirectory = function () {
-    return path.join(exports.getDataDirectory(), 'instances')
+    return path.join(exports.getDataDirectory(), ModPadConfig.settings.launcher.instanceDirectory)
 }
 
 /**

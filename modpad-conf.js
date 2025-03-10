@@ -11,9 +11,15 @@ const config = {
     launcher: {
         title: 'ModPad Launcher',
         icon: 'SealCircle', // Icon filename without extension
+        gameDirectory: '.helioslauncher', // Default game directory name in user's app data
         discordRPC: {
             clientId: '1ce6e35a-126f-48fd-97fb-54d143ac6d45', // Discord application ID
             enabled: true
+        },
+        autoUpdater: {
+            enabled: true, // Enable auto-updates
+            checkInterval: 30, // Check for updates every 30 minutes
+            allowPrerelease: false // Allow prerelease versions by default
         }
     },
 
@@ -21,8 +27,10 @@ const config = {
     mainWindow: {
         width: 1980,
         height: 552,
-        frame: false,
+        frame: true,
         backgroundColor: '#171614',
+        title: 'ModPad Launcher', // Window title
+        resizable: true,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false
@@ -79,7 +87,11 @@ const config = {
         },
         launcher: {
             allowPrerelease: false, // Allow prerelease versions
-            dataDirectory: null // Custom data directory (null = default location)
+            dataDirectory: null, // Custom data directory (null = default location)
+            commonDirectory: 'common', // Common directory name for shared game files
+            instanceDirectory: 'instances', // Instance directory name for per-server game files
+            tempNativeFolder: 'WCNatives', // Temp folder name for native libraries
+            showConsoleOnLaunch: false // Show game console window on launch
         }
     },
 
@@ -87,14 +99,17 @@ const config = {
     ui: {
         background: {
             useRandomBackground: true, // Use random background from backgrounds folder
-            defaultBackground: 0 // Default background ID if not random
+            defaultBackground: 0, // Default background ID if not random
+            backgroundsDirectory: 'backgrounds' // Directory name for background images
         },
         newsPanel: {
             enabled: true, // Show news panel
+            maxArticles: 10 // Maximum number of news articles to display
         },
         loginScreen: {
             forgotPasswordLink: 'https://www.minecraft.net/password/forgot',
-            needAccountLink: 'https://www.minecraft.net/store/minecraft-java-edition'
+            needAccountLink: 'https://www.minecraft.net/store/minecraft-java-edition',
+            defaultRememberAccount: true // Default state of "Remember Me" checkbox
         },
         mediaLinks: {
             github: 'https://github.com/dscalzi/HeliosLauncher',
@@ -104,13 +119,27 @@ const config = {
             discord: 'https://discord.gg/zNWUXdt'
         },
         supportLink: 'https://github.com/dscalzi/HeliosLauncher/issues',
-        sourceLink: 'https://github.com/dscalzi/HeliosLauncher'
+        sourceLink: 'https://github.com/dscalzi/HeliosLauncher',
+        branding: {
+            footerText: 'Powered by Helios Launcher',
+            showFooter: true,
+            splashImages: {
+                loadingLogo: 'LoadingSeal.png',
+                loadingSpinner: 'LoadingText.png'
+            }
+        }
+    },
+
+    // Server Status
+    serverStatus: {
+        checkInterval: 300000, // Check server status every 5 minutes (in milliseconds)
+        timeout: 2500 // Timeout for server status check (in milliseconds)
     },
 
     // Build Configuration
     build: {
-        appId: 'helioslauncher',
-        productName: 'Helios Launcher',
+        appId: 'MODPAD',
+        productName: 'MODPAD',
         copyright: 'Copyright © 2018-2024 Daniel Scalzi',
         artifactName: '${productName}-setup-${version}.${ext}',
         directories: {

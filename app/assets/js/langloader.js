@@ -2,17 +2,18 @@ const fs = require('fs-extra')
 const path = require('path')
 const toml = require('toml')
 const merge = require('lodash.merge')
+const ModPadConfig = require('../../../modpad-conf')
 
 let lang
 
-exports.loadLanguage = function(id){
+exports.loadLanguage = function (id) {
     lang = merge(lang || {}, toml.parse(fs.readFileSync(path.join(__dirname, '..', 'lang', `${id}.toml`))) || {})
 }
 
-exports.query = function(id, placeHolders){
+exports.query = function (id, placeHolders) {
     let query = id.split('.')
     let res = lang
-    for(let q of query){
+    for (let q of query) {
         res = res[q]
     }
     let text = res === lang ? '' : res
@@ -24,15 +25,15 @@ exports.query = function(id, placeHolders){
     return text
 }
 
-exports.queryJS = function(id, placeHolders){
+exports.queryJS = function (id, placeHolders) {
     return exports.query(`js.${id}`, placeHolders)
 }
 
-exports.queryEJS = function(id, placeHolders){
+exports.queryEJS = function (id, placeHolders) {
     return exports.query(`ejs.${id}`, placeHolders)
 }
 
-exports.setupLanguage = function(){
+exports.setupLanguage = function () {
     // Load Language Files
     exports.loadLanguage('en_US')
     // Uncomment this when translations are ready
@@ -40,4 +41,8 @@ exports.setupLanguage = function(){
 
     // Load Custom Language File for Launcher Customizer
     exports.loadLanguage('_custom')
+}
+
+exports.getLauncherTitle = function () {
+    return ModPadConfig.launcher.title
 }

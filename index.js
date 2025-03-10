@@ -228,12 +228,12 @@ ipcMain.on(MSFT_OPCODE.OPEN_LOGOUT, (ipcEvent, uuid, isLastAccount) => {
 let win
 
 function createWindow() {
-
     win = new BrowserWindow({
         width: ModPadConfig.mainWindow.width,
         height: ModPadConfig.mainWindow.height,
         icon: getPlatformIcon(ModPadConfig.launcher.icon),
         frame: ModPadConfig.mainWindow.frame,
+        title: ModPadConfig.mainWindow.title,
         webPreferences: {
             preload: path.join(__dirname, 'app', 'assets', 'js', 'preloader.js'),
             nodeIntegration: ModPadConfig.mainWindow.webPreferences.nodeIntegration,
@@ -254,7 +254,7 @@ function createWindow() {
     win.loadURL(pathToFileURL(path.join(__dirname, 'app', 'app.ejs')).toString())
 
     win.removeMenu()
-    win.resizable = true
+    win.resizable = ModPadConfig.mainWindow.resizable
     win.on('closed', () => {
         win = null
     })
