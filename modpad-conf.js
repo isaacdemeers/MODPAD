@@ -48,7 +48,7 @@ const config = {
     // Distribution
     distribution: {
         url: 'https://helios-files.geekcorner.eu.org/distribution.json', // URL to your distribution.json file
-        rss: null, // URL to your RSS feed for news
+        rss: 'null', // URL to your RSS feed for news
         mainServer: 'ModPad', // ID of the main server in your distribution
     },
 
