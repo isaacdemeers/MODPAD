@@ -23,6 +23,12 @@ const config = {
         }
     },
 
+    modules: {
+        serverList: {
+            enabled: true,
+        }
+    }
+
     // Main Window Configuration
     mainWindow: {
         width: 1080,
