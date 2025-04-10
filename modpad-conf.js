@@ -27,7 +27,7 @@ const config = {
         serverList: {
             enabled: true,
         }
-    }
+    },
 
     // Main Window Configuration
     mainWindow: {
